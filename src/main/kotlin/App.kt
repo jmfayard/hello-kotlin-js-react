@@ -21,6 +21,10 @@ class App : RComponent<RProps, AppState>() {
         welcome("KotlinConf Explorer")
         showVideos(state)
         //child(counter)
+        showVideoPlayer()
+    }
+
+    fun RBuilder.showVideoPlayer() {
         state.currentVideo?.let { currentVideo ->
             videoPlayer {
                 video = currentVideo

@@ -1,10 +1,10 @@
 data class Video(val id: Int, val title: String, val speaker: String, val videoUrl: String)
 
 val initialUnwatchedVideos = listOf(
-    Video(1, "Building and breaking things", "John Doe", "https://youtu.be/PsaFVLr8t4E"),
-    Video(2, "The development process", "Jane Smith", "https://youtu.be/PsaFVLr8t4E"),
-    Video(3, "The Web 7.0", "Matt Miller", "https://youtu.be/PsaFVLr8t4E")
+    Video(2, "Opening Keynote", "Andrey Breslav", "https://www.youtube.com/watch?v=0xKTM0A8gdI"),
+    Video(1, "The Power of Types", "Danny Preussler", "https://www.youtube.com/watch?v=t3DBzaeid74"),
+    Video(3, "The Ultimate Optimizer", "Erik Meijer", "https://www.youtube.com/watch?v=13eYMhuvmXE")
 )
 val initialWatchedVideos = listOf(
-    Video(4, "Mouseless development", "Tom Jerry", "https://youtu.be/PsaFVLr8t4E")
+    Video(4, "Using Kotlin for Data Science", "Roman Belov", "https://www.youtube.com/watch?v=APnyDVye4JA")
 )
