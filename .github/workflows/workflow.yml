@@ -12,4 +12,4 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:login
       - name: Build and push
-        run: git push -f https://@git.heroku.com/${{ secrets.HEROKU_APP_STAGING }}.git origin/master:master
+        run: git push -f https://git.heroku.com/${{ secrets.HEROKU_APP_STAGING }}.git origin/master:master
