@@ -42,3 +42,15 @@ dependencies {
     //Coroutines (chapter 8)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
 }
+
+tasks.register("stage") {
+    description = """
+        Deploy on Heroku
+        Configured via 
+        $ heroku buildpacks:set heroku/gradle
+        $ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-static.git
+        
+        heroku-buildpack-static is to be configured in static.json
+    """.trimIndent()
+    dependsOn("build")
+}
