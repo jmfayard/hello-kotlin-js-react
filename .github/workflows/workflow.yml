@@ -13,5 +13,6 @@ jobs:
         run: |
           heroku container:login
           heroku git:remote --ssh-git -a ${{ secrets.HEROKU_APP_STAGING }}
+          heroku ps
       - name: Build and push
         run: git push -f heroku origin/master
