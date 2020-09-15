@@ -1,3 +1,11 @@
+pluginManagement {
+    repositories {
+        maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
 
-rootProject.name = "hello-kotlin-js-react"
+        mavenCentral()
+
+        maven { setUrl("https://plugins.gradle.org/m2/") }
+    }
+}
+rootProject.name = "confexplorer"
 
