@@ -1,3 +1,5 @@
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import kotlinx.css.paddingLeft
 import kotlinx.css.px
 import react.*
@@ -13,8 +15,16 @@ external interface AppState : RState {
 
 class App : RComponent<RProps, AppState>() {
     override fun AppState.init() {
-        unwatchedVideos = initialUnwatchedVideos
-        watchedVideos = initialWatchedVideos
+        unwatchedVideos = listOf()
+        watchedVideos = listOf()
+
+        val mainScope = MainScope()
+        mainScope.launch {
+            val videos = fetchVideos()
+            setState {
+                unwatchedVideos = videos
+            }
+        }
     }
 
     override fun RBuilder.render() {
