@@ -11,6 +11,8 @@ import styled.styledH1
 
 external interface WelcomeProps : RProps {
     var name: String
+    var onWatchedButtonPressed: (Video) -> Unit
+    var unwatchedVideo: Boolean
 }
 
 class Welcome : RComponent<WelcomeProps, RState>() {

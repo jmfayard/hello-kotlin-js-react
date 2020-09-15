@@ -1,20 +1,45 @@
-import kotlinx.css.*
+import kotlinx.css.paddingLeft
+import kotlinx.css.px
 import react.*
 import react.dom.h3
-import react.dom.img
 import styled.css
 import styled.styledDiv
 
 external interface AppState : RState {
     var currentVideo: Video?
+    var unwatchedVideos: List<Video>
+    var watchedVideos: List<Video>
 }
 
 class App : RComponent<RProps, AppState>() {
+    override fun AppState.init() {
+        unwatchedVideos = initialUnwatchedVideos
+        watchedVideos = initialWatchedVideos
+    }
+
     override fun RBuilder.render() {
         welcome("KotlinConf Explorer")
         showVideos(state)
         //child(counter)
-        videoPlayer()
+        state.currentVideo?.let { currentVideo ->
+            videoPlayer {
+                video = currentVideo
+                unwatchedVideo = currentVideo in state.unwatchedVideos
+                onWatchedButtonPressed = { video ->
+                    if (video in state.unwatchedVideos) {
+                        setState {
+                            unwatchedVideos -= video
+                            watchedVideos += video
+                        }
+                    } else {
+                        setState {
+                            watchedVideos -= video
+                            unwatchedVideos += video
+                        }
+                    }
+                }
+            }
+        }
     }
 
     fun RBuilder.showVideos(state: AppState) {
@@ -26,7 +51,7 @@ class App : RComponent<RProps, AppState>() {
                 +"Videos to watch"
             }
             videoList {
-                videos = unwatchedVideos
+                videos = state.unwatchedVideos
                 selectedVideo = state.currentVideo
                 onSelectVideo = { video ->
                     setState {
@@ -39,30 +64,12 @@ class App : RComponent<RProps, AppState>() {
                 +"Videos watched"
             }
             videoList {
-                videos = watchedVideos
+                videos = state.watchedVideos
                 selectedVideo = state.currentVideo
                 onSelectVideo = { video ->
                     setState {
                         currentVideo = video
                     }
-                }
-            }
-        }
-    }
-
-    fun RBuilder.videoPlayer() {
-        styledDiv {
-            css {
-                position = Position.absolute
-                top = 10.px
-                right = 10.px
-            }
-            h3 {
-                +"John Doe: Building and breaking things"
-            }
-            img {
-                attrs {
-                    src = "https://via.placeholder.com/640x360.png?text=Video+Player+Placeholder"
                 }
             }
         }
